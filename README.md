@@ -1,3 +1,3 @@
 # Django-Blog
 
-This is my django blog
+By Fuhad Ihthisham
