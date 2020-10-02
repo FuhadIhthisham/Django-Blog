@@ -1,0 +1,100 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% for post in posts %}
+
+    <!-- Google material icons   -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <div class="media border mt-3 shadow p-3 mb-5 bg-white rounded">
+        <a href=""><img src="{{ post.author.profile.image.url }}" alt="" class="mr-2 mt-2 rounded-circle" width="80px" height="80px"></a>
+      <div class="media-body mt-1 ml-3 mb-3">
+          <h6 style="font-family:Helvetica">
+              <a href="{% url 'user-post' post.author.username %}">{{ post.author }} </a>
+              <small class="text-muted" style="user-select: none;"><i>{{ post.date_posted|date:'d F Y' }}</i></small>
+              {% if post.author == user %}
+                <a class="btn btn-secondary btn-sm mb-2 mr-auto"
+                   href="{% url 'blog-update' post.id %}">Update
+                </a>
+                <a class="btn btn-danger btn-sm mb-2 mr-auto"
+                   href="{% url 'blog-delete' post.id %}">Delete
+                </a>
+              {% endif %}
+          </h6>
+          <span class="text-decoration-none"
+                data-toggle="collapse"
+                href="#collapseExample{{ post.id }}"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseExample">
+            <h2 style="font-family:Times New Roman;user-select: none;">{{ post.title }} </h2>
+          </span>
+          <div class="collapse" id="collapseExample{{ post.id }}">
+              <div class="card card-body">
+                <p style="font-family:Courier">{{ post.content }}</p>
+              </div>
+          </div>
+      </div>
+    </div>
+
+<!--    <div class="card border-primary mb-2">-->
+<!--      <div class="card-header">{{ post.title }}</div>-->
+<!--      <div class="card-body text-primary">-->
+<!--        <h5 class="card-title"> Post By {{ post.author }}</h5>-->
+<!--        <p class="card-text">{{ post.content }}</p>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <h1>{{ post.title }} </h1>-->
+<!--    <p>{{ post.author }}</p>-->
+<!--    <p>{{ post.date_posted|date:'d F Y' }}</p>-->
+<!--    <p>{{ post.content }}</p>-->
+{% endfor %}
+<div align="center">
+{% if is_paginated %}
+    {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info btn-sm mt-4 mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info btn-sm mt-4 mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <a class="btn btn-info btn-sm mt-4 mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a class="btn btn-outline-info btn-sm mt-4 mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+        <a class="btn btn-outline-info btn-sm mt-4 mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info btn-sm mt-4 mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+{% endif %}
+
+<style>
+    .floating-btn {
+        width: 80px;
+        height: 80px;
+        background: #343a40cc;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none !important;
+        border-radius: 50%;
+        color: #ffffff !important;
+        font-size: 40px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+        position: fixed;
+        right: 25px;
+        bottom: 20px;
+        transition: background 0.25s;
+    }
+    .floating-btn:hover{
+        background: #343a40;
+
+    }
+
+    </style>
+
+    <a class="material-icons floating-btn" data-toggle="tooltip" data-placement="top" title="Add Post" href="{% url 'blog-create' %}">add</a>
+    
+</div>
+{% endblock content %}
