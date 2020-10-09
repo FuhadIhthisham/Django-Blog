@@ -8348,3 +8348,4 @@ DjangoBlog/__pycache__/settings.cpython-38.pyc
 DjangoBlog/__pycache__/urls.cpython-38.pyc
 DjangoBlog/__pycache__/wsgi.cpython-38.pyc
 .idea/vcs.xml
+db.sqlite3
