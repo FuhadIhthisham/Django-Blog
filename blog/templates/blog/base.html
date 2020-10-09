@@ -16,7 +16,9 @@
             </form>
             <div class="ml-auto">
               <ul class="navbar-nav mr-auto">
+              {% if request.path == "/" %}
                 <li class="nav-item active">
+              {% endif %}
                   <a class="nav-link" href="{% url 'blog-home' %}">Home</a>
                 </li>
                 {% if user.is_authenticated %}
@@ -28,15 +30,15 @@
                          data-toggle="dropdown"
                          aria-haspopup="true"
                          aria-expanded="false"
-                         style="user-select: none;">{{ user.username }}
+                         style="user-select: none;">
+                         {{ user.username }}
                          <img src="{{ user.profile.image.url }}"
                               alt="" class="rounded-circle"
                               width="30px" height="30px">
                       </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">View Profile</a>
+                      <a class="dropdown-item" href="{% url 'user-profile' user.username %}">View Profile </a>
                       <a class="dropdown-item" href="{% url 'profile' %}">Edit Profile</a>
-                      <a class="dropdown-item" href="#">Create Profile</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
                     </div>
