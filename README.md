@@ -5,6 +5,8 @@
 
 # Screenshots:
 
+![Capture3](https://user-images.githubusercontent.com/52383180/95575952-40bfc000-0a4d-11eb-98ba-6047b91b49bf.PNG)
+
 ![Capture](https://user-images.githubusercontent.com/52383180/95574973-84192f00-0a4b-11eb-9aa2-aa344d0a2b1a.PNG)
 
 ![Capture2](https://user-images.githubusercontent.com/52383180/95575204-e8d48980-0a4b-11eb-8444-5c4c6fb363db.PNG)
