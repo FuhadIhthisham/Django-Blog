@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from . forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from .models import Profile
+from django.contrib.auth.models import User
 
 
 def register(request):
@@ -40,7 +41,7 @@ def profile(request):
     }
     return render(request, 'users/profile.html', context)
 
-#
-# class UserProfileView(ListView):
-#     model = Profile
-#     template_name = 'users/user_profile.html'
+@login_required
+def view_profile(request, username):
+    user = get_object_or_404(User, username=username)
+    return render(request, 'users/user_profile.html', {"user":user})
