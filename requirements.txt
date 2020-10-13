@@ -1,11 +1,8 @@
 pip==20.2.2
 toml==0.10.1
-isort==5.5.3
 colorama==0.4.3
-setuptools==50.3.0
-pylint==2.6.0
-mccabe==0.6.1
 six==1.15.0
 wrapt==1.12.1
-Django==3.1.1
-Pillow==7.2.0
+Django
+Pillow
+django-crispy-forms
