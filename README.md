@@ -19,3 +19,5 @@ instagram: https://www.instagram.com/fu_had_ihthisham/
 facebook:  https://www.facebook.com/fuhad.ihthisham/
 
 linkedIn:  https://www.linkedin.com/in/fuhad-ihthisham-5aa029184/
+
+deployed page:  https://fuhadihthisham.pythonanywhere.com/
