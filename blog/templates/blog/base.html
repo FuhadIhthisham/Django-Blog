@@ -13,7 +13,7 @@
         </button>
 
         <div class="collapse navbar-collapse text-monospace" style="user-select: none;" id="navbarColor01">
-          {% if request.path != "/" and request.path != "/register/" and request.path != "/logout/" %}
+          {% if request.path != "/login/" and request.path != "/register/" and request.path != "/logout/" %}
             <form class="form-inline">
             <input class="form-control mr-2 col-8" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-light" type="submit">Search</button>
@@ -49,7 +49,7 @@
 
                 {% else %}
                   <li class="nav-item">
-                    {% if request.path != "/" %}
+                    {% if request.path != "/login/" %}
                       <a class="nav-link" href="{% url 'login' %}">Login</a>
                     {% endif %}
                   </li>
