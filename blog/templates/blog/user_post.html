@@ -5,7 +5,7 @@
         <div class="shadow-lg p-3 mb-5 mt-5 bg-white rounded" align="center">
             <img src="{{ post.author.profile.image.url }}"
                  alt="{{ post.author.username }}"
-                 class="rounded-circle p-3"
+                 class="rounded-circle p-3 user-select-none"
                  width="230"
                  height="230">
             <h2 class="bg-light mb-4 text-monospace">{{post.author.username}}</h2>
@@ -28,42 +28,42 @@
 
 
             {% if post.author.profile.instagram_url %}
-        <p class="mb-4 bg-light text-secondary">
-            <a href="{{ post.author.profile.instagram_url }}" style="text-decoration: none;">
-                <img src="https://www.flaticon.com/svg/static/icons/svg/174/174855.svg"
-                alt="Instagram"
-                width=20px
-                height=20px>
-            </a>
-            &nbsp;
-        {% endif %}
-        {% if post.author.profile.fb_url %}
-            <a href="{{ post.author.profile.fb_url }}" style="text-decoration: none;">
-                <img src="https://www.flaticon.com/svg/static/icons/svg/174/174848.svg"
-                alt="Facebook"
-                width=20px
-                height=20px>
-            </a>
-            &nbsp;
-        {% endif %}
-        {% if post.author.profile.linkedin_url %}
-            <a href="{{ post.author.profile.linkedin_url }}" style="text-decoration: none;">
-                <img src="https://www.flaticon.com/premium-icon/icons/svg/3256/3256016.svg"
-                alt="LinkedIn"
-                width=20px
-                height=20px>
-            </a>
-            &nbsp;
-        {% endif %}
-        {% if post.author.profile.website_url %}
-            <a href="{{ post.author.profile.website_url }}" style="text-decoration: none;">
-                <img src="https://www.flaticon.com/svg/static/icons/svg/718/718150.svg"
-                alt="Website"
-                width=20px
-                height=20px>
-            </a>
-        </p>
-        {% endif %}
+                <p class="mb-4 bg-light text-secondary user-select-none">
+                    <a href="{{ post.author.profile.instagram_url }}" style="text-decoration: none;">
+                        <img src="https://www.flaticon.com/svg/static/icons/svg/174/174855.svg"
+                        alt="Instagram"
+                        width=20px
+                        height=20px>
+                    </a>
+                    &nbsp;
+                {% endif %}
+                {% if post.author.profile.fb_url %}
+                    <a href="{{ post.author.profile.fb_url }}" style="text-decoration: none;">
+                        <img src="https://www.flaticon.com/svg/static/icons/svg/174/174848.svg"
+                        alt="Facebook"
+                        width=20px
+                        height=20px>
+                    </a>
+                    &nbsp;
+                {% endif %}
+                {% if post.author.profile.linkedin_url %}
+                    <a href="{{ post.author.profile.linkedin_url }}" style="text-decoration: none;">
+                        <img src="https://www.flaticon.com/premium-icon/icons/svg/3256/3256016.svg"
+                        alt="LinkedIn"
+                        width=20px
+                        height=20px>
+                    </a>
+                    &nbsp;
+                {% endif %}
+                {% if post.author.profile.website_url %}
+                    <a href="{{ post.author.profile.website_url }}" style="text-decoration: none;">
+                        <img src="https://www.flaticon.com/svg/static/icons/svg/718/718150.svg"
+                        alt="Website"
+                        width=20px
+                        height=20px>
+                    </a>
+                </p>
+            {% endif %}
 
 
         </div>
@@ -91,7 +91,10 @@
                     role="button"
                     aria-expanded="false"
                     aria-controls="collapseExample">
-                <h2 style="font-family:Times New Roman;user-select: none;">{{ post.title }}
+                <h2 style="font-family:Times New Roman;user-select: none;">
+                    {{ post.title }}
+                </h2>
+              </span>
                     {% if post.author == user %}
                         <a class="btn btn-secondary btn-sm mb-2 mr-auto"
                            href="{% url 'blog-update' post.id %}">Update
@@ -100,8 +103,7 @@
                            href="{% url 'blog-delete' post.id %}">Delete
                         </a>
                     {% endif %}
-                </h2>
-              </span>
+                
               <div class="collapse" id="collapseExample{{ post.id }}">
                   <div class="card card-body">
                     <p style="font-family:Courier">{{ post.content }}</p>
