@@ -8,11 +8,11 @@
             <p class="mb-4 bg-light text-secondary">{{ user.email }}</p>
         {% endif %}
     </div>
-    <div class="container mt-3" style="width:600px">
+    <div class="container mt-3 mb-5" style="width:600px">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset>
-                <legend class="p-3 mb-3 bg-light text-secondary border" style="user-select:none;">Profile Info</legend>
+                <legend class="p-3 mb-3 bg-light text-secondary border" style="user-select:none;">Update Profile</legend>
                 {{ u_form|crispy }}
                 {{ p_form|crispy }}
             </fieldset>

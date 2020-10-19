@@ -8352,3 +8352,6 @@ blog/migrations/__pycache__/0001_initial.cpython-38.pyc
 .idea/vcs.xml
 .idea/DjangoBlog.iml
 .idea/DjangoBlog.iml
+users/migrations/__pycache__/0002_profile_bio.cpython-38.pyc
+users/migrations/__pycache__/0003_profile_instagram_url.cpython-38.pyc
+users/migrations/__pycache__/0004_auto_20201018_2250.cpython-38.pyc

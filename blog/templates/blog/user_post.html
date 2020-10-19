@@ -2,35 +2,105 @@
 {% load crispy_forms_tags %}
 {% block content %}
     {% for post in posts|slice:":1" %}
-        <div class="mt-3 shadow p-3 mb-4 bg-white rounded" align="center">
-            <img src="{{ post.author.profile.image.url }}" alt="{{ post.author.username }}" class="rounded-circle p-3", width="230", height="230">
-            <h3 class="bg-light text-secondary font-weight-light">{{post.author.username}}</h3>
-            {% if user.email %}
-                <p class="mb-4 bg-light text-secondary">E-mail: {{ post.author.email }}</p>
+        <div class="shadow-lg p-3 mb-5 mt-5 bg-white rounded" align="center">
+            <img src="{{ post.author.profile.image.url }}"
+                 alt="{{ post.author.username }}"
+                 class="rounded-circle p-3"
+                 width="230"
+                 height="230">
+            <h2 class="bg-light mb-4 text-monospace">{{post.author.username}}</h2>
+            {% if post.author.email %}
+            <p class="mb-1 bg-light text-secondary">
+                <span class="user-select-none">E-mail:</span>
+                <div class="container shadow-sm p-2 mb-2 text-secondary" style="width:20em !important">
+                    {{ post.author.email }}
+                </div>
+            </p>
             {% endif %}
+
+            {% if post.author.profile.bio %}
+            <p class="mb-1 bg-light text-secondary"><span class="user-select-none">Bio:</span>
+                <div class="container shadow-sm p-2 mb-4 text-secondary" style="width:20em !important">
+                    {{ post.author.profile.bio }}
+                </div>
+            </p>
+            {% endif %}
+
+
+            {% if post.author.profile.instagram_url %}
+        <p class="mb-4 bg-light text-secondary">
+            <a href="{{ post.author.profile.instagram_url }}" style="text-decoration: none;">
+                <img src="https://www.flaticon.com/svg/static/icons/svg/174/174855.svg"
+                alt="Instagram"
+                width=20px
+                height=20px>
+            </a>
+            &nbsp;
+        {% endif %}
+        {% if post.author.profile.fb_url %}
+            <a href="{{ post.author.profile.fb_url }}" style="text-decoration: none;">
+                <img src="https://www.flaticon.com/svg/static/icons/svg/174/174848.svg"
+                alt="Facebook"
+                width=20px
+                height=20px>
+            </a>
+            &nbsp;
+        {% endif %}
+        {% if post.author.profile.linkedin_url %}
+            <a href="{{ post.author.profile.linkedin_url }}" style="text-decoration: none;">
+                <img src="https://www.flaticon.com/premium-icon/icons/svg/3256/3256016.svg"
+                alt="LinkedIn"
+                width=20px
+                height=20px>
+            </a>
+            &nbsp;
+        {% endif %}
+        {% if post.author.profile.website_url %}
+            <a href="{{ post.author.profile.website_url }}" style="text-decoration: none;">
+                <img src="https://www.flaticon.com/svg/static/icons/svg/718/718150.svg"
+                alt="Website"
+                width=20px
+                height=20px>
+            </a>
+        </p>
+        {% endif %}
+
+
         </div>
-        
     {% endfor %}
 
     {% for post in posts %}
+
         <div class="media border mt-3 shadow p-3 mb-5 bg-white rounded">
-            <a href=""><img src="{{ post.author.profile.image.url }}" alt="" class="mr-2 mt-2 rounded-circle" width="80px" height="80px" "></a>
+            <a href="">
+                <img src="{{ post.author.profile.image.url }}"
+                     alt=""
+                     class="mr-2 mt-2 rounded-circle"
+                     width="80px"
+                     height="80px">
+            </a>
+
           <div class="media-body mt-1 ml-3 mb-3">
               <h6 style="font-family:Helvetica">
                   <a href="{% url 'user-post' post.author.username %}">{{ post.author }} </a>
                   <small class="text-muted" style="user-select: none;"><i>{{ post.date_posted|date:'d F Y' }}</i></small>
-                  {% if post.author == user %}
-                    <a class="btn btn-secondary btn-sm mb-2 mr-auto" style="margin: 0px 0px 0px 48em" href="{% url 'blog-update' post.id %}">Update</a>
-                    <a class="btn btn-danger btn-sm mb-2 mr-auto" style="margin: 0px 0px 0px 0px" href="{% url 'blog-delete' post.id %}">Delete</a>
-                  {% endif %}
-              </h6>
+             </h6>
               <span class="text-decoration-none"
                     data-toggle="collapse"
                     href="#collapseExample{{ post.id }}"
                     role="button"
                     aria-expanded="false"
                     aria-controls="collapseExample">
-                <h2 style="font-family:Times New Roman;user-select: none;">{{ post.title }} </h2>
+                <h2 style="font-family:Times New Roman;user-select: none;">{{ post.title }}
+                    {% if post.author == user %}
+                        <a class="btn btn-secondary btn-sm mb-2 mr-auto"
+                           href="{% url 'blog-update' post.id %}">Update
+                        </a>
+                        <a class="btn btn-danger btn-sm mb-2 mr-auto"
+                           href="{% url 'blog-delete' post.id %}">Delete
+                        </a>
+                    {% endif %}
+                </h2>
               </span>
               <div class="collapse" id="collapseExample{{ post.id }}">
                   <div class="card card-body">
@@ -39,25 +109,17 @@
               </div>
           </div>
         </div>
+     {% endfor %}
 
-    <!--    <div class="card border-primary mb-2">-->
-    <!--      <div class="card-header">{{ post.title }}</div>-->
-    <!--      <div class="card-body text-primary">-->
-    <!--        <h5 class="card-title"> Post By {{ post.author }}</h5>-->
-    <!--        <p class="card-text">{{ post.content }}</p>-->
-    <!--      </div>-->
-    <!--    </div>-->
-
-    <!--    <h1>{{ post.title }} </h1>-->
-    <!--    <p>{{ post.author }}</p>-->
-    <!--    <p>{{ post.date_posted|date:'d F Y' }}</p>-->
-    <!--    <p>{{ post.content }}</p>-->
-    {% endfor %}
     <div align="center">
     {% if is_paginated %}
         {% if page_obj.has_previous %}
-            <a class="btn btn-outline-info btn-sm mt-4 mb-4" href="?page=1">First</a>
-            <a class="btn btn-outline-info btn-sm mt-4 mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            <a class="btn btn-outline-info btn-sm mt-4 mb-4"
+               href="?page=1">First
+            </a>
+            <a class="btn btn-outline-info btn-sm mt-4 mb-4"
+               href="?page={{ page_obj.previous_page_number }}">Previous
+            </a>
         {% endif %}
         {% for num in page_obj.paginator.page_range %}
             {% if page_obj.number == num %}
